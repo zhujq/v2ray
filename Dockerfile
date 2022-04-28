@@ -10,7 +10,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /wechat-token wechat-token.go
 
 
 
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -26,6 +26,7 @@ RUN apt-get update \
   && sed -ri 's/^#PubkeyAuthentication\s+.*/PubkeyAuthentication yes/' /etc/ssh/sshd_config \
   && sed -ri 's/^#?Port\s+.*/Port 88/' /etc/ssh/sshd_config  \
   && sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && mkdir /root/.ssh  \
+  && echo "Asia/Shanghai" > /etc/timezone &&  rm -f /etc/localtime   && dpkg-reconfigure -f noninteractive tzdata \
   && rm -rf /var/lib/apt/lists/* 
 COPY --from=builder /wechat-slb . 
 COPY --from=builder /wechat-token . 
