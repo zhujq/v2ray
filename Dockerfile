@@ -10,7 +10,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /wechat-token wechat-token.go
 
 
 
-FROM ubuntu:20.04
+FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
