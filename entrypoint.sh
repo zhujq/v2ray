@@ -16,4 +16,4 @@ fi
 
 cp -f /config.json .
 chmod +x v2ray v2ctl
-./v2ray
+V2RAY_VMESS_AEAD_FORCED=false ./v2ray run
