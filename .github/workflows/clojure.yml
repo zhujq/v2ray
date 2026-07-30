@@ -1,0 +1,25 @@
+name: Scheduled Wake Codespace
+
+on:
+  schedule:
+    # 定时任务：每 3.5 小时启动一次（根据你的闲置时间调整，避免其闭合）
+    # 格式为：分 时 天 月 周（UTC 时间，北京时间需要 -8 小时）
+    - cron: '0 */3 * * *'
+  workflow_dispatch: # 允许你在 GitHub 页面上点击按钮手动触发测试
+
+jobs:
+  wake:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Authenticate and Wake Codespace
+        env:
+          # 使用拥有 Codespaces 全限的个人访问令牌
+          GH_TOKEN: ${{ secrets.CODESPACE_WAKE_TOKEN }}
+          # 替换为你在步骤 1 复制的 Codespace 名字
+          CODESPACE_NAME: "你的-codespace-真实名称"
+        run: |
+          echo "正在检测 Codespace 状态..."
+          
+          # 使用 gh 命令行工具向目标 codespace 发送一条无害的空命令（例如查看机器运行时间）
+          # 这会强制激活已经处于 Stop 状态的实例
+          gh codespace ssh -c "$CODESPACE_NAME" -- uptime
