@@ -14,7 +14,7 @@ jobs:
           # 使用拥有 Codespaces 全限的个人访问令牌
           GH_TOKEN: ${{ secrets.CODESPACE_WAKE_TOKEN }}
           # 替换为你在步骤 1 复制的 Codespace 名字
-          CODESPACE_NAME: "zhujq-effective-space-goldfish-6rpjw7jv5j72574"
+          CODESPACE_NAME: "didactic-eureka-549w5pwv9gw247j4"
         run: |
           echo "正在检测 Codespace 状态..."
           
